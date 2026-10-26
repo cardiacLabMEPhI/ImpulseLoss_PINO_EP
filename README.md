@@ -256,8 +256,8 @@ Verify the Aliev–Panfilov parameters, `t_scale`, `timestep`, `mesh_size`, `phy
 
 If you use this repository, please cite:
 
-> *Physics-Informed Neural Operators for Cardiac Electrophysiology*
-> [arXiv:2511.08418](https://arxiv.org/abs/2511.08418)
+> *Impulse Loss Improves Physics-Informed Neural Operators in Cardiac Electrophysiology*
+> [](https://...)
 
 This project also uses NeuralOperator:
 
