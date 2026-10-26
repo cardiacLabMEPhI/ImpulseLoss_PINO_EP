@@ -1,0 +1,81 @@
+# Dataset and preprocessing.
+data_path: path/to/your/tensorized_dataset  # Directory containing train/validation tensors.
+start_index: 0  # Initial sample index, or auto when supported.
+frames: 5  # Number of input frames used by the FNO.
+mesh_size: 10  # Physical domain size in centimeters.
+train_res: 101  # Training spatial resolution.
+test_res:  # Validation resolutions.
+- 101
+eval_res: 101  # Evaluation spatial resolution.
+eval_con: 1.0  # Evaluation resolution scaling factor.
+n_train_samples: 152  # Number of training samples.
+n_test_samples: 30  # Number of validation/test samples.
+random_split: false  # Shuffle the split when true; preserve order when false.
+
+# Aliev–Panfilov parameters.
+D: 0.55  # Diffusion coefficient.
+K: 8.0  # Aliev–Panfilov K parameter.
+a: 0.099  # Excitability parameter.
+b: 0.099  # Recovery parameter.
+epsilon: 0.002  # Time-scale parameter.
+mu1: 0.1  # Nonlinearity parameter.
+mu2: 0.3  # Nonlinearity parameter.
+t_scale: 12.9  # Time scale used by the physics loss.
+conmul: 1.0  # Conductivity multiplier.
+adapt: 1  # Physics-loss adaptation mode.
+
+# adapt: 1 = fixed weights; 2 = SoftAdapt; 3 = RelAdapt.
+
+# Model architecture.
+ch: 2  # Number of state channels.
+hidden_channels: 32  # Number of hidden FNO channels.
+modes: 16  # Number of Fourier modes.
+encode_input: false  # Enable input/grid encoding.
+encode_output: false  # Enable output encoding.
+
+# Data-loss configuration.
+data_loss: 1.0  # Data-loss weight.
+init_data_loss_type: relative_l2  # Options: mse, rmse, weighted_mse, weighted_rmse, impulse_aware_mse, impulse_aware_rmse, relative_l2, soft_relative_l2_impulse_loss, hard_relative_l2_impulse_loss.
+main_data_loss_type: relative_l2  # Options: mse, rmse, weighted_mse, weighted_rmse, impulse_aware_mse, impulse_aware_rmse, relative_l2, soft_relative_l2_impulse_loss, hard_relative_l2_impulse_loss.
+
+# soft_relative_l2_impulse_loss parameters.
+false_negative_weight: 0.1  # False-negative component weight.
+false_positive_weight: 0.1  # False-positive component weight.
+impulse_threshold: 0.05  # Activation threshold.
+impulse_temperature: 0.05  # Temperature used by the soft masks.
+impulse_loss_eps: 1.0e-8  # Numerical stability constant.
+
+# Physics-loss configuration.
+phys_loss: true  # Enable the physics loss.
+phys_method: finite_difference  # Derivative method.
+res_loss: 0.01  # AP residual-loss weight.
+boundary: 0.1  # Boundary-loss weight.
+bc_loss: 0.1  # Neumann boundary-loss weight.
+ic_loss: 0.1  # Initial-condition loss weight.
+v_loss: 2.0  # Voltage residual weight.
+w_loss: 1.0  # Recovery-variable residual weight.
+
+# Training.
+batch_size: 16  # Training batch size.
+batch_size_test: 2  # Validation batch size.
+lr: 0.0005  # Learning rate.
+weight_decay: 0.00001  # Optimizer weight decay.
+train_types: [init, main]  # Stages included in this run.
+train_types_epochs: [1000, 1000]  # Epoch count for each stage.
+eval_step: 100  # Validation period in epochs.
+early_stopping: false  # Enable early stopping.
+early_stopping_min_delta: 0.0  # Minimum metric improvement.
+early_stopping_patience: 5  # Validation checks without improvement.
+
+# Checkpoint selection and evaluation.
+eval_metric: rmse  # Default validation metric.
+init_eval_metric: rmse  # Best-checkpoint metric for init.
+main_eval_metric: rmse  # Best-checkpoint metric for main.
+eval_types:  # Evaluation methods run after training.
+- p2p
+- rollout
+# Paths and runtime options.
+model_path_train:  # Optional initialization checkpoint; leave empty to train from scratch.
+train_result_path:  # Output directory; leave empty to use the default run directory.
+output: training_output_log  # Main training-log filename.
+results: Results  # Legacy output-directory name.

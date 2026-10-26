@@ -1,0 +1,27 @@
+# Path to the OpenCARP simulation output directory.
+sim_folder: path/to/your/opencarp_simulation
+space_factors: [4]
+time_factors: [1]
+sim_type: spiral
+extraction_start_index: 0
+runtime: 3600
+n_repeat: 0
+conmul: 1.0
+
+# Dataset construction options.
+is_full_eval: true
+output: dataset_info
+resolution: 100
+train: 0.32  # Fraction assigned to training data.
+test: 0.16  # Fraction assigned to validation/test data.
+eval: 0.52  # Fraction assigned to held-out evaluation data.
+time_limit:  # Optional simulation time limit.
+timestep: 5.0  # Temporal sampling interval in milliseconds.
+input_window: 5  # Number of input frames.
+output_window: 5  # Number of target frames.
+window_mode: overlapping  # Windowing strategy.
+random_split: false  # Keep sequential ordering when false.
+norm: false  # Normalize tensor values when true.
+channels: 2  # Number of state channels.
+coords: 0  # Include coordinate channels when greater than zero.
+mat:  # Optional material metadata.

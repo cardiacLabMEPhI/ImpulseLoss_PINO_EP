@@ -1,0 +1,50 @@
+# Evaluation model and physics parameters.
+D: 0.55
+K: 8.0
+a: 0.099
+adapt: 1
+b: 0.099
+batch_size: 16
+bc_loss: 0.1
+boundary: 0.1
+ch: 2
+conmul: 1.0
+data_loss: 1.0
+data_path: path/to/your/training_output  # Training output directory.
+data_path_full_eval: path/to/your/full_evaluation_dataset  # Full evaluation dataset.
+data_path_sample_eval: path/to/your/sample_evaluation_dataset  # Sample evaluation dataset.
+encode_input: false
+encode_output: false
+epsilon: 0.002
+eval_data_type: sample  # Evaluation data type.
+eval_metric: rmse
+eval_output_dir: path/to/your/evaluation_output  # Evaluation output directory.
+eval_res: 101
+eval_stage: main  # Training stage associated with the checkpoint.
+eval_stage_dir_name: main  # Legacy stage-directory label.
+eval_types:
+- full
+- sample
+fine_tune: false  # Fine-tune during evaluation when supported.
+hidden_channels: 32
+horizon: 5
+ic_loss: 0.1
+impulse_threshold: 0.05
+mesh_size: 10
+model_path_eval: path/to/your/checkpoint.pt  # Model checkpoint to evaluate.
+modes: 16
+moving_window: 5
+mu1: 0.1
+mu2: 0.3
+n_sample_eval_samples: 239
+phys_loss: true
+phys_method: finite_difference
+random: false
+res_loss: 0.01
+run_dir: path/to/your/run_directory  # Root directory for this run.
+seen: 0
+start_index: 0
+t_scale: 12.9
+train_result_path: path/to/your/training_output  # Directory containing training logs.
+v_loss: 2.0
+w_loss: 1.0
